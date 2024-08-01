@@ -36,10 +36,23 @@ public class Application {
         totalSalesPerCustomer.forEach((customer, totalSails) -> System.out.println("Cliente: " + customer + " totale vendite: " + totalSails));
 
         System.out.println("**************ESERCIZIO3**************");
-        System.out.println("Trova i prodotti più costosi");
+        System.out.println("TROVA I PRODOTTI PIU' COSTOSI");
 
         OptionalDouble maxPrice = warehouse.stream().mapToDouble(Product::getPrice).max();
         System.out.println("il prodotto più costoso costa: " + maxPrice);
+
+        System.out.println("**************ESERCIZIO4**************");
+        System.out.println("CALCOLA LA MEDIA DEGLI IMPORTI DEGLI ORDINI");
+
+        double averageOrdersPrices = orders.stream().collect(Collectors.averagingDouble(Order::getTotal));
+        System.out.println("Media degli importi degli ordini: " + averageOrdersPrices);
+
+        System.out.println("**************ESERCIZIO5**************");
+        System.out.println("RAGGRUPPA I PRODOTTI PER CATEGORIA E CALCOLA LA SOMMA DEGLI IMPORTI PER OGNI CATEGORIA");
+
+        Map<String, Double> totalAmountPerCategory = warehouse.stream().collect(Collectors.groupingBy(Product::getCategory, Collectors.summingDouble(Product::getPrice)));
+        totalAmountPerCategory.forEach((category, total) -> System.out.println(category + ": " + total));
+        
     }
 
     public static void initializeWarehouse() {
