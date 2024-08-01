@@ -31,6 +31,12 @@ public class Application {
 
         Map<Customer, List<Order>> ordersByCustomer = orders.stream().collect(Collectors.groupingBy(Order::getCustomer));
         ordersByCustomer.forEach((customer, orders) -> System.out.println("Gli ordini del cliente: " + customer + " sono: " + orders));
+
+        System.out.println("**************ESERCIZIO2**************");
+        System.out.println("DATO UN ELENCO DI ORDINI, CALCOLARE IL TOTALE DELLE VENDITE PER OGNI CLIENTE");
+
+        Map<Customer, Double> totalSalesPerCustomer = orders.stream().collect(Collectors.groupingBy(Order::getCustomer, Collectors.summingDouble(Order::getTotal)));
+        totalSalesPerCustomer.forEach((customer, totalSails) -> System.out.println("Cliente: " + customer + " totale vendite: " + totalSails));
     }
 
     public static void initializeWarehouse() {
