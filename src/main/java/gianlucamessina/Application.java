@@ -4,10 +4,7 @@ import gianlucamessina.entitites.Customer;
 import gianlucamessina.entitites.Order;
 import gianlucamessina.entitites.Product;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Application {
@@ -37,6 +34,12 @@ public class Application {
 
         Map<Customer, Double> totalSalesPerCustomer = orders.stream().collect(Collectors.groupingBy(Order::getCustomer, Collectors.summingDouble(Order::getTotal)));
         totalSalesPerCustomer.forEach((customer, totalSails) -> System.out.println("Cliente: " + customer + " totale vendite: " + totalSails));
+
+        System.out.println("**************ESERCIZIO3**************");
+        System.out.println("Trova i prodotti più costosi");
+
+        OptionalDouble maxPrice = warehouse.stream().mapToDouble(Product::getPrice).max();
+        System.out.println("il prodotto più costoso costa: " + maxPrice);
     }
 
     public static void initializeWarehouse() {
